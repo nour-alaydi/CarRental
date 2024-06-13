@@ -23,10 +23,17 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/admin_screen"/>
+    <ImageButton
+        android:id="@+id/homeBtn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="650dp"
+        app:srcCompat="@drawable/icons8_home_30" />
 
 
     <Button
-        android:id="@+id/btnCustomerLogin"
+        android:id="@+id/btnAdminLogin"
         style="@style/CustomButton"
         android:layout_width="203dp"
         android:layout_height="wrap_content"
@@ -39,7 +46,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnCustomerLogin"
+        android:layout_below="@id/btnAdminLogin"
         android:layout_marginStart="40dp"
         android:layout_marginTop="37dp"
         android:text="@string/or_to_enter_a_new_admin_press_the_button_below"
@@ -47,7 +54,7 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/btncustomerSignUp"
+        android:id="@+id/btnAdminSignUp"
         android:layout_width="204dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView4"

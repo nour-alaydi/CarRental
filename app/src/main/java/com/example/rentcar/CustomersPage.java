@@ -1,5 +1,10 @@
 package com.example.rentcar;
 
+
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,19 +50,20 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
     private CarAdapter carAdapter;
     private RecyclerView recyclerView;
     private String selectedBrand = ""; // Initialize selectedBrand
-
     private String customerID; // Variable to store customerID
-    private String firstName;  // Variable to store firstName
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers_page);
+        customerID = getIntent().getStringExtra("customerID");
+        System.out.println("heyyyy"+customerID);
+        Intent intent = new Intent(CustomersPage.this, RentalHistoryActivity.class);
 
-        // Retrieve customerID and firstName from the intent
-        Intent intent = getIntent();
-        customerID = intent.getStringExtra("customerID");
-//        firstName = intent.getStringExtra("firstName");
+        intent.putExtra("customerID", customerID);
+        Intent intent2 = new Intent(CustomersPage.this, RentDetailsActivity.class);
+
+        intent2.putExtra("customerID", customerID);
 
         // Initialize views
         startdatetxt = findViewById(R.id.startdatetxt);
@@ -79,16 +85,22 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
         startDateCalendar = Calendar.getInstance();
         endDateCalendar = Calendar.getInstance();
 
+        // Restore state if available
+        if (savedInstanceState != null) {
+            startdatetxt.setText(savedInstanceState.getString("startDate"));
+            enddatetxt.setText(savedInstanceState.getString("endDate"));
+            selectedBrand = savedInstanceState.getString("selectedBrand");
+            // Set the spinner to the saved selection
+            int spinnerPosition = ((ArrayAdapter) brandSpinner.getAdapter()).getPosition(selectedBrand);
+            brandSpinner.setSelection(spinnerPosition);
+        }
+
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomersPage.this, RentalHistoryActivity.class);
-                System.out.println(customerID+"Custommmmmmmer");
-                intent.putExtra("customerID", customerID);
-                startActivity(intent);
 
-                Intent addIntent = new Intent(CustomersPage.this, RentDetailsActivity.class);
-                addIntent.putExtra("customerID", customerID);
+
+                startActivity(intent);
 
             }
         });
@@ -97,9 +109,9 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
         startDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                startDateCalendar.set(Calendar.YEAR, year);
-                startDateCalendar.set(Calendar.MONTH, month);
-                startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                startDateCalendar.set(YEAR, year);
+                startDateCalendar.set(MONTH, month);
+                startDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
                 updateStartDate();
             }
         };
@@ -107,9 +119,9 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
         endDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                endDateCalendar.set(Calendar.YEAR, year);
-                endDateCalendar.set(Calendar.MONTH, month);
-                endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                endDateCalendar.set(YEAR, year);
+                endDateCalendar.set(MONTH, month);
+                endDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
                 updateEndDate();
             }
         };
@@ -119,9 +131,9 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CustomersPage.this, startDateListener,
-                        startDateCalendar.get(Calendar.YEAR),
-                        startDateCalendar.get(Calendar.MONTH),
-                        startDateCalendar.get(Calendar.DAY_OF_MONTH));
+                        startDateCalendar.get(YEAR),
+                        startDateCalendar.get(MONTH),
+                        startDateCalendar.get(DAY_OF_MONTH));
                 // Set the minimum date to today
                 datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
                 datePickerDialog.show();
@@ -133,9 +145,10 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CustomersPage.this, endDateListener,
-                        endDateCalendar.get(Calendar.YEAR),
-                        endDateCalendar.get(Calendar.MONTH),
-                        endDateCalendar.get(Calendar.DAY_OF_MONTH));
+                        // Set OnClickListener for end date button (continued)
+                        endDateCalendar.get(YEAR),
+                        endDateCalendar.get(MONTH),
+                        endDateCalendar.get(DAY_OF_MONTH));
                 // Set the minimum date to today
                 datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
                 datePickerDialog.show();
@@ -213,7 +226,7 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
                                 carList = new ArrayList<>(); // Clear existing data
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject object = response.getJSONObject(i);
-                                    int carID = object.getInt("carID");
+                                    int carID = object.getInt("carID"); // Fetch carID
 
                                     String carBrand = object.getString("carBrand");
                                     String carModel = object.getString("carModel");
@@ -228,7 +241,7 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
                                 }
 
                                 // Update the adapter with new data
-                                carAdapter = new CarAdapter(carList, startdatetxt.getText().toString(), enddatetxt.getText().toString());
+                                carAdapter = new CarAdapter(carList, startdatetxt.getText().toString(), enddatetxt.getText().toString(), customerID);
                                 recyclerView.setAdapter(carAdapter);
                                 carAdapter.notifyDataSetChanged();
 
@@ -240,6 +253,8 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
                         } else {
                             Log.w("CarFetcher", "Empty JSON response from server");
                             // Handle empty response (e.g., display a message indicating no cars found)
+                            carList.clear(); // Clear the existing data
+                            carAdapter.notifyDataSetChanged(); // Notify the adapter of the change
                             Toast.makeText(CustomersPage.this, "No cars found", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -257,9 +272,18 @@ public class CustomersPage extends AppCompatActivity implements Response.Listene
         queue.add(request);
     }
 
+
     @Override
     public void onResponse(JSONArray jsonArray) {
-        // Handle JSON response if needed
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save the current state
+        outState.putString("startDate", startdatetxt.getText().toString());
+        outState.putString("endDate", enddatetxt.getText().toString());
+        outState.putString("selectedBrand", selectedBrand);
     }
 }
-

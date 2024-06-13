@@ -47,7 +47,7 @@ public class SignUpAdminScreen extends AppCompatActivity {
         username = findViewById(R.id.username);
         adminemail = findViewById(R.id.adminemail);
         edtTxtPassword = findViewById(R.id.edtTxtPassword);
-        btnAdminSignUp = findViewById(R.id.btncustomerSignUp);
+        btnAdminSignUp = findViewById(R.id.btnAdminSignUp);
     }
 
     private void signUpAdmin() {
@@ -59,9 +59,8 @@ public class SignUpAdminScreen extends AppCompatActivity {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-        Admin admin = new Admin(usernameStr, passwordStr, emailStr);
 
-        String url = "http://192.168.1.119/CarRental/AdminSignUp.php";
+        String url = "http://172.19.0.120/CarRental/AdminSignUp.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -74,7 +73,6 @@ public class SignUpAdminScreen extends AppCompatActivity {
                     Toast.makeText(SignUpAdminScreen.this, message, Toast.LENGTH_SHORT).show();
 
                     if (status.equals("success")) {
-
                         Intent intent = new Intent(SignUpAdminScreen.this, AdminScreen.class);
                         startActivity(intent);
                         finish();
@@ -94,9 +92,9 @@ public class SignUpAdminScreen extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", admin.getUsername());
-                params.put("email", admin.getEmail());
-                params.put("password", admin.getPassword());
+                params.put("username", usernameStr);
+                params.put("email", emailStr);
+                params.put("password", passwordStr);
                 return params;
             }
         };

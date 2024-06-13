@@ -52,7 +52,7 @@ public class CustomerSignUp extends AppCompatActivity {
         edtTxtPhoneNum = findViewById(R.id.PhoneNum);
         edtTxtEmail = findViewById(R.id.adminemail);
         edtTxtPassword = findViewById(R.id.edtTxtPassword);
-        btnCustomerSignUp = findViewById(R.id.btncustomerSignUp);
+        btnCustomerSignUp = findViewById(R.id.btnAdminSignUp);
         edtTxtIDNumber = findViewById(R.id.IDNumber);
     }
 
@@ -68,9 +68,8 @@ public class CustomerSignUp extends AppCompatActivity {
             Toast.makeText(CustomerSignUp.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-        Customer customer = new Customer(Integer.parseInt(id), firstName, lastName, email, phoneNumber, password, "");
 
-        String url = "http://192.168.1.119/CarRental/CustomerSignup.php";
+        String url = "http://172.19.0.120/CarRental/CustomerSignup.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -102,12 +101,12 @@ public class CustomerSignUp extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("idNumber", String.valueOf(customer.getIdNumber()));
-                params.put("firstName", customer.getFirstName());
-                params.put("lastName", customer.getLastName());
-                params.put("phoneNumber", customer.getPhoneNumber());
-                params.put("email", customer.getEmail());
-                params.put("password", customer.getPassword());
+                params.put("idNumber", id);
+                params.put("firstName", firstName);
+                params.put("lastName", lastName);
+                params.put("phoneNumber", phoneNumber);
+                params.put("email", email);
+                params.put("password", password);
                 return params;
             }
         };

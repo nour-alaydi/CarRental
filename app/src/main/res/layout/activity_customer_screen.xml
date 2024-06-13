@@ -71,7 +71,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/btncustomerSignUp"
+        android:id="@+id/btnCustomerSignUp"
         style="@style/CustomButton"
         android:layout_width="204dp"
         android:layout_height="wrap_content"
@@ -79,5 +79,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/sign_up1" />
+
+    <ImageButton
+        android:id="@+id/homeBtn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="650dp"
+        app:srcCompat="@drawable/icons8_home_30" />
+
+
+
 
 </RelativeLayout>

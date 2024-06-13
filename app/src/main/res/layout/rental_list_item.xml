@@ -19,6 +19,8 @@
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxWidth="150dp"
+            android:minWidth="150dp"
             android:textColor="@color/navyblue"
             android:textSize="20sp" />
 
@@ -74,7 +76,9 @@
                 android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:backgroundTint="@color/navyblue"
+                android:text="@string/cancel"
+                style="@style/ButtonStyle"
                 android:visibility="gone" />
 
         </LinearLayout>

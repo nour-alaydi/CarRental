@@ -10,11 +10,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -53,7 +55,6 @@ public class RentDetailsActivity extends AppCompatActivity {
 
         // Get data from intent
         Intent intent = getIntent();
-        Intent intent2 = getIntent();
         String imagePath = intent.getStringExtra("carImage");
         String brandModel = intent.getStringExtra("carBrandModel");
         int price = intent.getIntExtra("carPrice", 0);
@@ -62,20 +63,24 @@ public class RentDetailsActivity extends AppCompatActivity {
         String status = intent.getStringExtra("carStatus");
         String startDate = intent.getStringExtra("startDate");
         String endDate = intent.getStringExtra("endDate");
+        //herorrrr
         String customerID = intent.getStringExtra("customerID");
+        System.out.println("CUST ID IS:" +customerID);
 
-        System.out.println("customer id"+customerID);
 
-        // Set data to views
+
+// Set data to views
         Glide.with(this).load(imagePath).into(carImage);
         carBrandModel.setText(brandModel);
         carPrice.setText("Price: $" + price);
         carColor.setText("Color: " + color);
         carStatus.setText("Status: " + status);
         startDateValue.setText(startDate);
+        String d = "hey";
+        Log.d("start is: " + startDate, d);
         endDateValue.setText(endDate);
 
-        // Calculate total cost
+// Calculate total cost
         try {
             if (startDate != null && endDate != null) { // Check if both dates are not null
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -101,38 +106,10 @@ public class RentDetailsActivity extends AppCompatActivity {
         btnRentNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (customerID == null || customerID.isEmpty()) {
-//                    showError("Customer ID is missing");
-//                    return;
-//                }
-//
-//                if (carID == null || carID.isEmpty()) {
-//                    showError("Car ID is missing");
-//                    return;
-//                }
-//
-//                if (startDate == null || startDate.isEmpty()) {
-//                    showError("Start date is missing");
-//                    return;
-//                }
-//
-//                if (endDate == null || endDate.isEmpty()) {
-//                    showError("End date is missing");
-//                    return;
-//                }
-
-                String totalPriceString = totalCostValue.getText().toString().substring(1);
-                int totalPrice;
-                try {
-                    totalPrice = Integer.parseInt(totalPriceString);
-                } catch (NumberFormatException e) {
-                    showError("Total price format error");
-                    return;
-                }
 
                 String url = "http://172.19.0.120/CarRental/add_rental.php";
                 RequestQueue queue = Volley.newRequestQueue(RentDetailsActivity.this);
-                System.out.println(customerID+"77777777777777777777");
+
                 StringRequest request = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
@@ -153,7 +130,6 @@ public class RentDetailsActivity extends AppCompatActivity {
 
                                     if (success == 1) {
                                         Toast.makeText(RentDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
-                                        finish();
                                     } else {
                                         Toast.makeText(RentDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
                                     }
@@ -169,17 +145,15 @@ public class RentDetailsActivity extends AppCompatActivity {
                                 Toast.makeText(RentDetailsActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }) {
-
-
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<>();
-                        System.out.println("p+++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.println(customerID+"dkocffvfkhk");
                         params.put("idNumber", customerID);
-                        params.put("carID", carID);
+                        params.put("carID", String.valueOf(carID));  // Assuming carID is already defined
                         params.put("startDate", startDate);
                         params.put("endDate", endDate);
+                        String totalPriceString = totalCostValue.getText().toString().substring(1);
+                        int totalPrice = Integer.parseInt(totalPriceString);
                         params.put("totalPrice", String.valueOf(totalPrice));
 
                         Log.d("RentalParams", "idNumber: " + params.get("idNumber"));
@@ -200,8 +174,6 @@ public class RentDetailsActivity extends AppCompatActivity {
     private void showError(String message) {
         totalCostValue.setText(message);
         totalCostValue.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+
     }
 }
-
-
-

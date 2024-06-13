@@ -1,8 +1,10 @@
 package com.example.rentcar;
 
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -10,22 +12,43 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +65,8 @@ public class AddCarScreen extends AppCompatActivity {
     private Button buttonInsertImage;
     private Button buttonInsertCar;
     private EditText imageName;
+    private ImageButton homeBtn;
+    private ImageButton adminBtn;
     private String imagePath = null;
 
     @Override
@@ -66,6 +91,22 @@ public class AddCarScreen extends AppCompatActivity {
                 addCar();
             }
         });
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddCarScreen.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        adminBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddCarScreen.this, AdminScreen.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void setupViews() {
@@ -80,6 +121,8 @@ public class AddCarScreen extends AppCompatActivity {
         buttonInsertImage = findViewById(R.id.buttonInsertImage);
         buttonInsertCar = findViewById(R.id.buttonInsertCar);
         imageName = findViewById(R.id.imageName);
+        homeBtn = findViewById(R.id.homeBtn);
+        adminBtn = findViewById(R.id.adminBtn);
 
 
         if (textViewTitle == null || spinnerCarBrand == null || spinnerStatus == null ||
@@ -93,7 +136,7 @@ public class AddCarScreen extends AppCompatActivity {
         Log.d("AddCarScreen", "populateSpinners called");
 
         List<String> carBrands = Arrays.asList(
-                "Toyota", "Honda", "Ford", "BMW", "Audi", "Tesla", "Chevrolet", "Hyundai",
+                "Select Brand", "Toyota", "Honda", "Ford", "BMW", "Audi", "Tesla", "Chevrolet", "Hyundai",
                 "Nissan", "Kia", "Mercedes-Benz", "Volkswagen", "Subaru", "Lexus", "Jeep",
                 "Mazda", "Volvo", "Porsche", "Ferrari", "Jaguar", "Land Rover", "Maserati"
         );
@@ -177,6 +220,7 @@ public class AddCarScreen extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(AddCarScreen.this, "Car inserted successfully", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override

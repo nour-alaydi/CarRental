@@ -5,6 +5,7 @@
     android:id="@+id/carView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".CarViewScreen">
 
 
@@ -21,12 +22,12 @@
     <Button
         android:id="@+id/btnSearch"
         style="@style/CustomButton"
-        android:layout_width="121dp"
-        android:layout_height="46dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignRight="@+id/spinnerCarBrand"
-        android:layout_marginLeft="259dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
-        android:layout_marginRight="-252dp"
+        android:layout_marginRight="-199dp"
         android:text="Apply Filter" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -60,22 +61,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/rcViewCars"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="90dp"
         android:layout_marginTop="50dp"
         android:text="@string/add_car" />
-
-    <Button
-        android:id="@+id/btnUpdate"
-        style="@style/CustomButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rcViewCars"
-        android:layout_alignEnd="@+id/btnAdd"
-
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="-141dp"
-        android:layout_marginRight="-273dp"
-        android:text="Update Car" />
 
     <Button
         android:id="@+id/btnDelete"
@@ -83,10 +71,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/rcViewCars"
-        android:layout_alignEnd="@+id/btnUpdate"
+        android:layout_alignEnd="@+id/btnAdd"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="-141dp"
         android:text="@string/delete_car" />
+
+    <ImageButton
+        android:id="@+id/homeBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="650dp"
+        app:srcCompat="@drawable/icons8_home_30" />
+
+
+    <ImageButton
+        android:id="@+id/adminBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="650dp"
+        android:layout_alignRight="@+id/homeBtn"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="-80dp"
+        app:srcCompat="@drawable/icons8_admin_50" />
 
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/alike_angular</item>
+        <item>@font/quando</item>
     </array>
 </resources>

@@ -147,7 +147,7 @@ public class UpdateCarScreen extends AppCompatActivity {
     }
 
     public void updateCar(Car car) {
-        String url = "http://192.168.1.119/CarRental/AddNewCar.php";
+        String url = "http://172.19.0.120/CarRental/AddNewCar.php";
 
         // Create request queue for Volley
         RequestQueue requestQueue = Volley.newRequestQueue(this);

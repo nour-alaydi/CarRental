@@ -210,7 +210,7 @@ public class UpdateCarActivity extends AppCompatActivity {
                                 System.out.println(imageUrl+" %%%%%%%%%%%%%%%hhhhhhhhhhhhhhh");
 
                                 Glide.with(UpdateCarActivity.this)
-                                        .load("http://192.168.1.119/CarRental/images/"+imageUrl)
+                                        .load("http://172.19.0.120/CarRental/images/"+imageUrl)
                                         .into(car_im);
 
                                 // Fill text fields with retrieved car details

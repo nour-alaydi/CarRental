@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- App Strings -->
     <string name="app_name">CarRentalProject</string>
     <string name="go_to_admin_page">Go To Admin Page</string>
     <string name="go_to_customer_page">Go To Customer Page</string>
@@ -26,7 +28,7 @@
     <string name="enter_color">Enter Color</string>
     <string name="enter_id_number">Enter ID Number</string>
     <string name="insert_car">Insert Car</string>
-    <string name="update_car_s_details">Update Car\'s Details</string>
+    <string name="update_car_s_details">Update Car Details</string>
     <string name="add_car">Add Car</string>
     <string name="delete_car">Delete Car</string>
     <string name="enter_car_id">Enter Car ID To Delete</string>
@@ -57,31 +59,48 @@
     <string name="total_price">Total price</string>
     <string name="welcome_admin">Welcome Admin</string>
     <string name="requests_list">Requests List</string>
+    <string name="welcome_customer">Welcome</string>
+    <string name="history">History</string>
+    <string name="apply_filter">Apply Filter</string>
+    <string name="car_brand_model">Car Brand and Model</string>
+    <string name="car_price">Car Price</string>
+    <string name="car_color">Car Color</string>
+    <string name="car_status">Car Status</string>
+    <string name="total_cost">Total Cost:</string>
+    <string name="rent_now">Rent Now</string>
+    <string name="this_is_a_list_of_all_your_rentals">This is a list of all your rentals</string>
+    <string name="start_datewithspace">Start Date:      </string>
+    <string name="end_datewithspace">End Date:        </string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Car Brands Array -->
     <string-array name="car_brands">
-            <item>ALL</item>
-            <item>Toyota</item>
-            <item>Honda</item>
-            <item>Ford</item>
-            <item>BMW</item>
-            <item>Audi</item>
-            <item>Tesla</item>
-            <item>Chevrolet</item>
-            <item>Hyundai</item>
-            <item>Nissan</item>
-            <item>Kia</item>
-            <item>Mercedes-Benz</item>
-            <item>Volkswagen</item>
-            <item>Subaru</item>
-            <item>Lexus</item>
-            <item>Jeep</item>
-            <item>Mazda</item>
-            <item>Volvo</item>
-            <item>Porsche</item>
-            <item>Ferrari</item>
-            <item>Jaguar</item>
-            <item>Land Rover</item>
-            <item>Maserati</item>
-        </string-array>
+        <item>ALL</item>
+        <item>Toyota</item>
+        <item>Honda</item>
+        <item>Ford</item>
+        <item>BMW</item>
+        <item>Audi</item>
+        <item>Tesla</item>
+        <item>Chevrolet</item>
+        <item>Hyundai</item>
+        <item>Nissan</item>
+        <item>Kia</item>
+        <item>Mercedes-Benz</item>
+        <item>Volkswagen</item>
+        <item>Subaru</item>
+        <item>Lexus</item>
+        <item>Jeep</item>
+        <item>Mazda</item>
+        <item>Volvo</item>
+        <item>Porsche</item>
+        <item>Ferrari</item>
+        <item>Jaguar</item>
+        <item>Land Rover</item>
+        <item>Maserati</item>
+    </string-array>
+
+    <!-- Months Array -->
     <string-array name="months_array">
         <item>January</item>
         <item>February</item>

@@ -1,6 +1,7 @@
 package com.example.rentcar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +15,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-
 public class InsertIDDelete extends AppCompatActivity {
-
 
     private EditText editTextCarId;
     private Button buttonDeleteCar;
     private static final String DELETE_URL = "http://172.19.0.120/CarRental/DeleteCar.php";
+    private static final String TAG = "InsertIDDelete";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +46,25 @@ public class InsertIDDelete extends AppCompatActivity {
         }
 
         String url = DELETE_URL + "?id=" + carId;
+        Log.d(TAG, "Request URL: " + url);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d(TAG, "Response: " + response);
                         if (response.equals("success")) {
                             Toast.makeText(InsertIDDelete.this, "Car deleted successfully", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            Toast.makeText(InsertIDDelete.this, "Failed to delete car", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InsertIDDelete.this, "Failed to delete car: " + response, Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, "Error: " + error.getMessage());
                         Toast.makeText(InsertIDDelete.this, "Error deleting car", Toast.LENGTH_SHORT).show();
                     }
                 });

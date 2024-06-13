@@ -1,5 +1,6 @@
 package com.example.rentcar;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,8 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -24,13 +25,17 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class AdminScreen extends AppCompatActivity {
 
     private Button btnAdminLogin;
     private Button btnAdminSignUp;
     private EditText edtTxtUsername;
     private EditText edtTxtPassword;
+    private ImageButton homeBtn;
+
+    private static final String PREFS_NAME = "AdminPrefs";
+    private static final String KEY_USERNAME = "adminUsername";
+    private static final String KEY_PASSWORD = "adminPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +44,35 @@ public class AdminScreen extends AppCompatActivity {
         setupViews();
         goToSignUpScreen();
 
+        // Restore saved username and password
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String savedUsername = sharedPreferences.getString(KEY_USERNAME, "");
+        String savedPassword = sharedPreferences.getString(KEY_PASSWORD, "");
+        edtTxtUsername.setText(savedUsername);
+        edtTxtPassword.setText(savedPassword);
+
         btnAdminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 adminLogin();
             }
         });
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminScreen.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupViews() {
-        btnAdminLogin = findViewById(R.id.btnCustomerLogin);
-        btnAdminSignUp = findViewById(R.id.btncustomerSignUp);
+        btnAdminLogin = findViewById(R.id.btnAdminLogin);
+        btnAdminSignUp = findViewById(R.id.btnAdminSignUp);
         edtTxtUsername = findViewById(R.id.edtTxtUsername);
         edtTxtPassword = findViewById(R.id.edtTxtPassword);
+        homeBtn = findViewById(R.id.homeBtn);
     }
 
     public void goToSignUpScreen() {
@@ -87,14 +108,14 @@ public class AdminScreen extends AppCompatActivity {
                     String message = jsonObject.getString("message");
 
                     if (status.equals("success")) {
+                        // Save username in SharedPreferences
                         saveUsername(username);
 
+                        // Navigate to HomeActivity or Admin dashboard
                         Intent intent = new Intent(AdminScreen.this, HomeActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(AdminScreen.this, message, Toast.LENGTH_SHORT).show();
-                        message.contains("Username or password is incorrect,please try again or Sign up");
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -122,10 +143,9 @@ public class AdminScreen extends AppCompatActivity {
     }
 
     private void saveUsername(String username) {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("username", username);
+        editor.putString(KEY_USERNAME, username);
         editor.apply();
     }
 }
-
