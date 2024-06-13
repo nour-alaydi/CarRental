@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnSearch"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".AddCarScreen">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/CustomTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_a_new_car"/>
+
+
+    <Spinner
+        android:id="@+id/spinnerCarBrand"
+        style="@style/CustomTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="48dp"
+        android:hint="@string/select_car_brand" />
+
+    <EditText
+        android:id="@+id/editTextCarModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerCarBrand"
+        android:layout_marginTop="45dp"
+        android:hint="@string/enter_car_model" />
+
+    <EditText
+        android:id="@+id/editTextPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextCarModel"
+        android:layout_marginTop="32dp"
+        android:hint="@string/enter_price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPrice"
+        android:layout_marginTop="28dp"
+        android:hint="@string/enter_color" />
+
+    <Spinner
+        android:id="@+id/spinnerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextColor"
+        android:layout_marginTop="19dp"
+        android:hint="@string/select_status" />
+
+    <Button
+        android:id="@+id/buttonInsertImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerStatus"
+        android:layout_marginTop="35dp"
+        style="@style/CustomButton"
+        android:text="@string/insert_image" />
+
+    <EditText
+        android:id="@+id/imageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerStatus"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="-230dp"
+        android:hint="@string/image_path" />
+
+    <Button
+        android:id="@+id/buttonInsertCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonInsertImage"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="27dp"
+        style="@style/CustomButton"
+        android:text="@string/insert_car" />
+
+</RelativeLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#03184E"
+    android:backgroundTint="#020D29"
+    tools:context=".HomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF243150"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/l_title"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/alike_angular"
+            android:gravity="center"
+            android:text="@string/welcome_admin"
+            android:textColor="#FFFFFFFF"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_pending"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#75FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="#FFFFFFFF" />
+
+            <TextView
+                android:id="@+id/txt_confirmed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#75FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/txt_paid"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#75FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alike_angular"
+            android:text="@string/requests_list"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <ListView
+            android:id="@+id/lst_Request"
+            android:layout_width="match_parent"
+            android:layout_height="421dp"
+            android:layout_marginTop="20dp"
+            android:background="#90FFFFFF"
+            android:cacheColorHint="#FFFFFFFF" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/bt_Vhome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00021032"
+                app:srcCompat="@drawable/icons8_home_30" />
+
+            <ImageButton
+                android:id="@+id/bt_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00021032"
+                app:srcCompat="@drawable/icons8_view_24" />
+
+            <ImageButton
+                android:id="@+id/bt_Vrep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_report_50" />
+
+
+            <ImageButton
+                android:id="@+id/bt_Vupdate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_edit_24" />
+
+            <ImageButton
+                android:id="@+id/bt_Vpay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_us_dollar_circled_50" />
+
+            <ImageButton
+                android:id="@+id/bt_return"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_car_rental_30" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

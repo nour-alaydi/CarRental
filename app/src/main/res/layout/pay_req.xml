@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#03184E"
+    android:backgroundTint="#020D29"
+    tools:context=".PayRequests">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF243150"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/l_title"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/alike_angular"
+            android:gravity="center"
+            android:text="@string/confirmed_requests"
+            android:textColor="#FFFFFFFF"
+            android:textSize="25sp" />
+
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="256dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="20dp"
+            android:background="#54FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="center"
+            android:queryHint="enter user ID" />
+
+        <Button
+            android:id="@+id/bt_searpay"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            style="@style/CustomAdminButton"
+            android:text="@string/search" />
+
+        <TextView
+            android:id="@+id/txt_choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alike_angular"
+            android:gravity="center"
+            android:text="@string/choose_rental_to_be_paid"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_pay"
+            android:layout_width="match_parent"
+            android:layout_height="432dp"
+            android:background="#7EFFFFFF" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/bt_Vhome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00021032"
+                app:srcCompat="@drawable/icons8_home_30" />
+
+            <ImageButton
+                android:id="@+id/bt_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00021032"
+                app:srcCompat="@drawable/icons8_view_24" />
+
+            <ImageButton
+                android:id="@+id/bt_Vrep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_report_50" />
+
+
+            <ImageButton
+                android:id="@+id/bt_Vupdate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_edit_24" />
+
+            <ImageButton
+                android:id="@+id/bt_Vpay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_us_dollar_circled_50" />
+
+            <ImageButton
+                android:id="@+id/bt_return"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#0003184E"
+                app:srcCompat="@drawable/icons8_car_rental_30" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
